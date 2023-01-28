@@ -1,3 +1,46 @@
 .App {
-  text-align: center;
+  width: 800px;
+  margin: 20px auto;
+  
+
 }
+
+.question {
+  background-color: rgb(155, 166, 189);
+  padding: 20px;
+  white-space: pre-line;
+  border-color: rgb(107, 107, 107);
+  border-width: 1px;
+  border-style: solid;
+
+}
+
+.answer {
+  background-color: rgba(173, 187, 218, 0.603);
+  padding: 20px;
+  white-space: pre-line;
+  border-color: rgb(236, 236, 236);
+
+}
+
+ .bold-text {
+  font-weight: bold;
+
+}
+
+.answer-box {
+  padding: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow: auto;
+
+} 
+
+.question-box {
+  border: 1px solid rgb(145, 145, 189);
+}
+
+/* .submit-button {
+  border: 1px solid rgb(145, 145, 189);
+  
+} */
