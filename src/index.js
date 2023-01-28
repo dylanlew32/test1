@@ -12,7 +12,7 @@ root.render(
     <App />
   </React.StrictMode>
 );
-document.title = 'AIhelper'
+
 reportWebVitals();
 
 
