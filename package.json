@@ -2,6 +2,7 @@
   "name": "test1",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dylanlew32.github.io/test1/build/",
   "dependencies": {
     "@microsoft/fetch-event-source": "^2.0.1",
     "@testing-library/jest-dom": "^5.14.1",
