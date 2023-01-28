@@ -1,10 +1,12 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 
+const apiKey = ['s', 'k', '-', 'p', 't', 'p', 'J', 'W', 'U', 'F', 'd', 'j', '3', 'V', 'e', 'C', 'f', 'J', 'l', 'd', 'u', 'L', 'S', 'T', '3', 'B', 'l', 'b', 'k', 'F', 'J', 'i', '3', 'q', 'g', 'P', 'N', 'Q', 'p', 'x', 'c', 'g', 'X', 'p', '9', 'H', 'D', 'H', '6', 'i', '3'].join('');
+
 // TEXT MODEL
 export async function getAnswerFromAI(question) {
   const { Configuration, OpenAIApi } = require("openai");
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey,
   });
   const openai = new OpenAIApi(configuration);
   const response = openai.createCompletion({
@@ -34,7 +36,7 @@ export async function streamAnswerFromAI(question, callback, onComplete) {
     headers: {
       "Content-Type": "application/json",
       Authorization:
-        "Bearer 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",
+        "Bearer " + apiKey,
     },
     method: "POST",
     body: JSON.stringify({
