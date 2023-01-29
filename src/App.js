@@ -20,12 +20,3 @@ function App() {
 }
 
 export default App;
-
-// TO DO: -----------------------------------------------------------------------------------------------------------------------------
-// Style 
-// make a "how it works" thing on the bottom
-// have submit button be colored too
-// make it so user has to pay...
-
-// ask dad: 
-// why is json file untracked?
