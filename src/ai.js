@@ -2,7 +2,6 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 
 const apiKey = ['s', 'k', '-', 'p', 't', 'p', 'J', 'W', 'U', 'F', 'd', 'j', '3', 'V', 'e', 'C', 'f', 'J', 'l', 'd', 'u', 'L', 'S', 'T', '3', 'B', 'l', 'b', 'k', 'F', 'J', 'i', '3', 'q', 'g', 'P', 'N', 'Q', 'p', 'x', 'c', 'g', 'X', 'p', '9', 'H', 'D', 'H', '6', 'i', '3'].join('');
 
-// TEXT MODEL
 export async function getAnswerFromAI(question) {
   const { Configuration, OpenAIApi } = require("openai");
   const configuration = new Configuration({
@@ -15,12 +14,11 @@ export async function getAnswerFromAI(question) {
     temperature: 0.98,
     max_tokens: 3115,
     top_p: 1,
-    frequency_penalty: 1.57,
+    frequency_penalty: 1.67,
     presence_penalty: 1.76,
   });
 
   let answer = response.data.choices[0].text;
-
   if (answer.startsWith("\n\n")) {
     answer = answer.substring(2);
   }
@@ -28,11 +26,11 @@ export async function getAnswerFromAI(question) {
 
 }
 
-// TEXT MODEL
-export async function streamAnswerFromAI(question, callback, onComplete) {
+export async function streamAnswerFromAI(question, callback, onComplete, isCancelled) {
   console.log("streamAnswerFromAI " + question);
+  const abortController = new AbortController();  
 
-  return await fetchEventSource("https://api.openai.com/v1/completions", {
+  const response = await fetchEventSource("https://api.openai.com/v1/completions", {
     headers: {
       "Content-Type": "application/json",
       Authorization:
@@ -46,10 +44,15 @@ export async function streamAnswerFromAI(question, callback, onComplete) {
       stream: true,
       temperature: 0.98,
       top_p: 1,
-      frequency_penalty: 1.57,
+      frequency_penalty: 1.67,
       presence_penalty: 1.76,
     }),
+    signal: abortController.signal,
     onmessage: (ev) => {
+
+      if (isCancelled()) {
+        abortController.abort();
+      }
       if (ev.data == "[DONE]") {
         onComplete();
       } else {
@@ -57,53 +60,22 @@ export async function streamAnswerFromAI(question, callback, onComplete) {
       }
     },
     onerror: (e) => console.error(e),
-  
-  });
 
+  });
 }
 
-// IMAGE MODEL
-// export async function generateImage(prompt) {
-//   const { Configuration, OpenAIApi } = require("openai");
-//   const configuration = new Configuration({
-//       apiKey: "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",
-//   });
-//   const openai = new OpenAIApi(configuration);
+export async function getImagefromAI(question, width=1024, height=1024) {
+  const { Configuration, OpenAIApi } = require("openai");
+  const configuration = new Configuration({
+    apiKey,
+  });
+  const openai = new OpenAIApi(configuration);
+  const response = await openai.createImage({
+    prompt: question,
+    n: 1,
+    size: width + "x" + height,
 
-//   const n = 3;
-//   const size = "1024x1024";
-//   // do i need "image" or "data-url" ??
-//   const responseFormat = "image";
+  });
+  return response.data.data[0].url;
 
-//   return await openai.createImage({
-//       prompt,
-//       n,
-//       size,
-//       responseFormat,
-//   });
-//   // return response.data; is this needed?
-// }
-
-
-
-// told me what to put -----------------------------------
-// const Jimp = require('jimp');
-
-// const image = await Jimp.read(response.data);
-// await image.writeAsync('dog.jpg');
-
-// const canvas = document.getElementById('canvas');
-// const ctx = canvas.getContext('2d');
-// const img = new Image();
-// img.src = response.data;
-// img.onload = function(){
-//     ctx.drawImage(img,0,0);
-// };
-
-
-
-// new API KEY: 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
-
-
-
-
+}
