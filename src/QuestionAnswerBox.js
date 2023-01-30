@@ -75,7 +75,7 @@ function QuestionAnswerBox() {
 
     fullQuestion += " " + question;
     console.log("calling streamAnswerFromAI");
-    setAnswer("Working on it...");
+    setAnswer("Loading...");
 
     try {
       const url = await getImagefromAI(

@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(225, 227, 230);  
+  background-color: rgb(212, 211, 211);  
 }
 
 .answer-box {
@@ -7,7 +7,6 @@ body {
   margin: 0;
   white-space: pre-wrap;
   overflow: auto;
-  
 
 }
 
@@ -20,7 +19,6 @@ body {
 .description {
   display: flex;
   justify-content: center;
-  /* font-weight:lighter; */
   font-size: 18px;
   margin-top: inherit;
   margin-bottom: initial;
@@ -31,7 +29,7 @@ body {
   background-color: rgb(163, 171, 187);
   padding: 20px;
   white-space: pre-line;
-  border-color: rgb(159, 185, 185);
+  border-color: rgba(138, 143, 143, 0.952);
   border-width: 2px;
   border-style: solid;
 
@@ -48,11 +46,6 @@ body {
 
 }
 
- /* .bold-text {
-  font-weight: bold;
-
-} */
-
 .answer-box {
   padding: 0;
   margin: 0;
@@ -60,23 +53,19 @@ body {
   overflow: auto;
 
 } 
-/* 
-.question-box {
-  border: 1px solid rgb(0, 0, 255);
-} */
-
 
 .question-section {
   position:sticky;
   bottom:0;
-  background-color: rgb(225, 227, 230);  
+  background-color: rgb(212, 211, 211);  
   padding: 10px 0;  
+
 }
 
 textarea {
   width: 100%;
   height:150px;
-  margin-top: 3px;
+  margin-top:10px;
   border-width: 1px;
 
 }
