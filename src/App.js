@@ -8,14 +8,21 @@ import './index.css';
 
 function App() {
   return (
+  <div class="container mt-3">
    <div className="App">
 
     <div className='top-text'>
-      <h1>Q&A With AI</h1>
+      <h1>Q&A with AI</h1>
     </div>
+    
+    <div className='description'>
+      <p>Ask any question and the AI will answer!</p>
+    </div>
+
     {/* <img src={logo} className="App-logo" alt="logo" /> */}
     <QuestionAnswerBox />
    </div>
+  </div>
   );
 }
 
