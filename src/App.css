@@ -1,25 +1,29 @@
-html {
-  height: 100%;
-  background-color: rgba(63, 62, 62, 0.986);
-
-}
-
 body {
-  box-sizing: border-box;
-  height: 100%;
-
+  background-color: rgb(225, 227, 230);  
 }
 
-#root {
-  height: 100%;
-  background-color: rgb(225, 227, 230);
+.answer-box {
+  padding: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow: auto;
   
+
 }
 
-.App {
-  height: 100%;
-  max-width: 800px;
-  margin: 20px auto;
+.top-text {
+  display: flex;
+  justify-content: center;
+
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  /* font-weight:lighter; */
+  font-size: 18px;
+  margin-top: inherit;
+  margin-bottom: initial;
 
 }
 
@@ -64,8 +68,9 @@ body {
 
 .question-section {
   position:sticky;
-  bottom:10px;
-
+  bottom:0;
+  background-color: rgb(225, 227, 230);  
+  padding: 10px 0;  
 }
 
 textarea {

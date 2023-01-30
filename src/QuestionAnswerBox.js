@@ -1,7 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getImagefromAI, streamAnswerFromAI } from "./ai";
-import "./App.css";
-import "./index.css";
 
 const defaultImageHeight = 256;
 const defaultImageWidth = 256;
@@ -22,15 +20,16 @@ function QuestionAnswerBox() {
     setIsBusy(true);
     isCancelled.current = false;
     setQuestionHistory([...questionHistory, question]);
+    
     setQuestion("");
 
     let fullQuestion = "";
     for (let i = 0; i < questionHistory.length; i++) {
-      fullQuestion += "Question: " + questionHistory[i] + "\n";
-      fullQuestion += "Answer: " + responses[i] + "\n";
+      fullQuestion += " " + questionHistory[i] + "\n";
+      fullQuestion += " " + responses[i] + "\n";
     }
 
-    fullQuestion += "Question: " + question;
+    fullQuestion += " " + question;
 
     console.log("calling streamAnswerFromAI");
     setAnswer("");
@@ -54,6 +53,8 @@ function QuestionAnswerBox() {
         setAnswer("");
         setResponses([...responses, currentAnswer]);
         setIsBusy(false);
+        
+
       },
       () => isCancelled.current
     );
@@ -69,26 +70,39 @@ function QuestionAnswerBox() {
 
     let fullQuestion = "";
     for (let i = 0; i < questionHistory.length; i++) {
-      fullQuestion += "Question: " + questionHistory[i] + "\n";
+      fullQuestion += " " + questionHistory[i] + "\n";
     }
 
-    fullQuestion += "Question: " + question;
+    fullQuestion += " " + question;
     console.log("calling streamAnswerFromAI");
     setAnswer("Working on it...");
 
-    const url = await getImagefromAI(
-      fullQuestion,
-      defaultImageWidth,
-      defaultImageHeight
-    );
-    setAnswer(url);
-    setResponses([...responses, url]);
+    try {
+      const url = await getImagefromAI(
+        fullQuestion,
+        defaultImageWidth,
+        defaultImageHeight
+      );
+      setAnswer(url);
+      setResponses([...responses, url]);
+    } catch (error) {
+      setAnswer('Error: ' + error.response.data.error.message);
+      setResponses([...responses, 'Error: ' + error.response.data.error.message]);
+    }
+    
+
   };
 
   const handleClearAll = () => {
     setQuestionHistory([]);
     setResponses([]);
   };
+
+  useEffect(()=> {
+    
+      document.documentElement.scrollTop = document.documentElement.scrollHeight;
+    
+  },[responses, questionHistory, answer]);
 
   return (
     <div>
@@ -118,6 +132,7 @@ function QuestionAnswerBox() {
       </div>
       <div>
         <button
+        className="btn btn-primary me-2"
           onClick={isBusy ? handleCancel : handleSubmitQ}
           disabled={question.trim() == "" && !isBusy}
         >
@@ -125,14 +140,15 @@ function QuestionAnswerBox() {
         </button>
 
         <button
+        className="btn btn-primary"
           onClick={handleSubmitImage}
           disabled={question.trim() == "" || isBusy}
         >
           Image
         </button>
         {questionHistory.length == 0 ? null : (
-          <button onClick={handleClearAll} style={{ float: "right" }}>
-            Start Over
+          <button onClick={handleClearAll} style={{ float: "right" }} className="btn btn-secondary">
+            Restart
           </button>
         )}
       </div>
