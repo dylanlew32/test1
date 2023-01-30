@@ -11,11 +11,11 @@ export async function getAnswerFromAI(question) {
   const response = openai.createCompletion({
     model: "text-davinci-003",
     prompt: question,
-    temperature: 0.98,
-    max_tokens: 3115,
-    top_p: 1,
-    frequency_penalty: 1.67,
-    presence_penalty: 1.76,
+    temperature: 0.97,
+    max_tokens: 3225,
+    top_p: 0.94,
+    frequency_penalty: 1.85,
+    presence_penalty: 2,
   });
 
   let answer = response.data.choices[0].text;
@@ -40,12 +40,12 @@ export async function streamAnswerFromAI(question, callback, onComplete, isCance
     body: JSON.stringify({
       model: "text-davinci-003",
       prompt: question,
-      max_tokens: 3115,
+      max_tokens: 3225,
       stream: true,
-      temperature: 0.98,
-      top_p: 1,
-      frequency_penalty: 1.67,
-      presence_penalty: 1.76,
+      temperature: 0.97,
+      top_p: 0.94,
+      frequency_penalty: 1.85,
+      presence_penalty: 2,
     }),
     signal: abortController.signal,
     onmessage: (ev) => {

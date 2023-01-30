@@ -46,10 +46,10 @@ function QuestionAnswerBox() {
           currentAnswer += token;
           setAnswer(currentAnswer);
         }
-        //console.log(token);
+ 
       },
       () => {
-        //console.log('onComplete');
+  
         setAnswer("");
         setResponses([...responses, currentAnswer]);
         setIsBusy(false);
@@ -88,8 +88,8 @@ function QuestionAnswerBox() {
     } catch (error) {
       setAnswer('Error: ' + error.response.data.error.message);
       setResponses([...responses, 'Error: ' + error.response.data.error.message]);
+
     }
-    
 
   };
 
@@ -109,7 +109,6 @@ function QuestionAnswerBox() {
       {questionHistory.map((q, i) => (
         <div key={i}>
           <div className="question">{q}</div>
-          {/* <div className="answer">{(i==questionHistory.length-1 && answer) ? answer : responses[i]}</div> */}
           <Answer
             answer={
               i == questionHistory.length - 1 && answer ? answer : responses[i]
@@ -153,31 +152,6 @@ function QuestionAnswerBox() {
         )}
       </div>
       </div>
-      {/* <label>Answer:</label>
-            <br/> */}
-
-      {/* {responses.map((sentence, i) => <p key={i} className="chat-bubble">{sentence}</p>)}*/}
-
-      {/* <div>
-                {responses.map((sentence, i) => (
-                    <Typing speed={30} delay={1000} key={i}>
-                        <p>{sentence}</p>
-                    </Typing>
-                ))}
-            </div> */}
-      {/* {<textarea type="text" value={answer} readOnly style={{width:600, height:200, marginTop: '3px'}} /> } */}
-      {/* <br />
-            
-
-            <textarea type="text" value={answer} readOnly style={{width:600, height:200, marginTop: '3px'}}>
-                <div>
-                    {responses.map((sentence, i) => (
-                    <Typing speed={40} delay={1000} key={i}>
-                        <p className="chat-bubble">{sentence}</p>
-                    </Typing>
-                    ))}
-                </div>
-            </textarea> */}
     </div>
   );
 }
