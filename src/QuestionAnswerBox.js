@@ -20,7 +20,6 @@ function QuestionAnswerBox() {
     setIsBusy(true);
     isCancelled.current = false;
     setQuestionHistory([...questionHistory, question]);
-    
     setQuestion("");
 
     let fullQuestion = "";
@@ -53,7 +52,6 @@ function QuestionAnswerBox() {
         setAnswer("");
         setResponses([...responses, currentAnswer]);
         setIsBusy(false);
-        
 
       },
       () => isCancelled.current
@@ -62,12 +60,13 @@ function QuestionAnswerBox() {
 
   const handleCancel = () => {
     isCancelled.current = true;
+    setIsBusy(false);
+
   };
 
   const handleSubmitImage = async () => {
     setQuestionHistory([...questionHistory, question]);
     setQuestion("");
-
     let fullQuestion = "";
     for (let i = 0; i < questionHistory.length; i++) {
       fullQuestion += " " + questionHistory[i] + "\n";
@@ -88,22 +87,22 @@ function QuestionAnswerBox() {
     } catch (error) {
       setAnswer('Error: ' + error.response.data.error.message);
       setResponses([...responses, 'Error: ' + error.response.data.error.message]);
-
     }
 
   };
 
+  // NEEDED
   const handleClearAll = () => {
     setQuestionHistory([]);
     setResponses([]);
   };
 
+  // NEEDED
   useEffect(()=> {
-    
       document.documentElement.scrollTop = document.documentElement.scrollHeight;
-    
   },[responses, questionHistory, answer]);
 
+  // OG -------------------------
   return (
     <div>
       {questionHistory.map((q, i) => (
@@ -135,7 +134,7 @@ function QuestionAnswerBox() {
           onClick={isBusy ? handleCancel : handleSubmitQ}
           disabled={question.trim() == "" && !isBusy}
         >
-          {isBusy ? "Cancel" : "Submit"}
+          {isBusy ? "Stop generating" : "Submit"}
         </button>
 
         <button
@@ -154,8 +153,10 @@ function QuestionAnswerBox() {
       </div>
     </div>
   );
+
 }
 
+// NEEDED 
 const Answer = ({ answer = "" }) => {
   if (answer.startsWith("https://")) {
     return (
