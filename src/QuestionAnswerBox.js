@@ -25,7 +25,7 @@ function QuestionAnswerBox() {
     let fullQuestion = "";
     for (let i = 0; i < questionHistory.length; i++) {
       fullQuestion += " " + questionHistory[i] + "\n";
-      fullQuestion += " " + responses[i] + "\n";
+      //fullQuestion += " " + responses[i] + "\n";
     }
 
     fullQuestion += " " + question;
@@ -61,7 +61,6 @@ function QuestionAnswerBox() {
   const handleCancel = () => {
     isCancelled.current = true;
     setIsBusy(false);
-
   };
 
   const handleSubmitImage = async () => {
@@ -91,18 +90,15 @@ function QuestionAnswerBox() {
 
   };
 
-  // NEEDED
   const handleClearAll = () => {
     setQuestionHistory([]);
     setResponses([]);
   };
 
-  // NEEDED
   useEffect(()=> {
       document.documentElement.scrollTop = document.documentElement.scrollHeight;
   },[responses, questionHistory, answer]);
 
-  // OG -------------------------
   return (
     <div>
       {questionHistory.map((q, i) => (
@@ -123,7 +119,7 @@ function QuestionAnswerBox() {
       <br />
       <div>
         <textarea
-          type="text"
+          type="text" placeholder="Ask your question here..."
           value={question}
           onChange={handleQuestionChange}
         />
@@ -134,7 +130,7 @@ function QuestionAnswerBox() {
           onClick={isBusy ? handleCancel : handleSubmitQ}
           disabled={question.trim() == "" && !isBusy}
         >
-          {isBusy ? "Stop generating" : "Submit"}
+          {isBusy ? "Cancel" : "Submit"}
         </button>
 
         <button
@@ -156,7 +152,6 @@ function QuestionAnswerBox() {
 
 }
 
-// NEEDED 
 const Answer = ({ answer = "" }) => {
   if (answer.startsWith("https://")) {
     return (
