@@ -8,7 +8,7 @@ function App() {
    <div className="App">
 
     <div className='top-text'>
-      <h1>Q&A with AI</h1>
+      <h1>Learn with AI</h1>
     </div>
     
     <div className='description'>
