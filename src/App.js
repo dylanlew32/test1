@@ -15,7 +15,6 @@ function App() {
       <p>Ask any question and the AI will answer!</p>
     </div>
 
-    {/* <img src={logo} className="App-logo" alt="logo" /> */}
     <QuestionAnswerBox />
    </div>
   </div>

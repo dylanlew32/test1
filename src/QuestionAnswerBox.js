@@ -119,7 +119,7 @@ function QuestionAnswerBox() {
       <br />
       <div>
         <textarea
-          type="text" placeholder="Ask your question here..."
+          type="text" placeholder="No longer in use, sorry :("
           value={question}
           onChange={handleQuestionChange}
         />

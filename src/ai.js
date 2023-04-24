@@ -2,6 +2,9 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 
 const apiKey = ['s', 'k', '-', 'p', 't', 'p', 'J', 'W', 'U', 'F', 'd', 'j', '3', 'V', 'e', 'C', 'f', 'J', 'l', 'd', 'u', 'L', 'S', 'T', '3', 'B', 'l', 'b', 'k', 'F', 'J', 'i', '3', 'q', 'g', 'P', 'N', 'Q', 'p', 'x', 'c', 'g', 'X', 'p', '9', 'H', 'D', 'H', '6', 'i', '3'].join('');
 
+// const newApiKey = ['s', 'k', '-', 'i', 'F', 'c', '7', '7', 'D', '0', 'P', 'E', 'Z', 'r', 'N', 'm', 'R', 'q', 'n', '4', 'q', 'k','R','T', '3','B','l','b','k','F','J','o','4','Q','k','u','L','h','9','T','C','n','e','O','R','Z','s','4','G','t','s'].join('');
+
+
 // export async function getAnswerFromAI(question) {
 //   const { Configuration, OpenAIApi } = require("openai");
 //   const configuration = new Configuration({
@@ -44,10 +47,11 @@ export async function streamAnswerFromAI(question, callback, onComplete, isCance
     method: "POST",
     body: JSON.stringify({
       model: "text-davinci-003",
+      // model: "gpt-3.5-turbo-0301",
       prompt: question,
       max_tokens: 2048,
       stream: true,
-      temperature: 0.2,
+      temperature: 0.4,
       top_p: 0.54,
       frequency_penalty: 1,
       presence_penalty: 1,
